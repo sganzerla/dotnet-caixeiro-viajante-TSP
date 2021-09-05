@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Windows.Forms;
 using Gurobi;
 
 namespace CaixeiroViajante
@@ -26,14 +28,22 @@ namespace CaixeiroViajante
                 ModelSense = GRB.MINIMIZE
             };
             GRBVar[,] X = new GRBVar[_numeroPontos, _numeroPontos];
+            GRBVar[] U = new GRBVar[_numeroPontos];
             // criação das variáveis de decisão da função objetivo
             for(int i = 0; i < _numeroPontos; i++)
             {
                 for(int j=0; j < _numeroPontos; j++)
                 {
-                    X[i, j] = Modelo.AddVar(0, 1, MatrizDistancias[i, j], GRB.BINARY, "X_" + i.ToString() + "_");
+                    // função objetivo
+                    X[i, j] = Modelo.AddVar(lb: 0, ub: 1, obj: MatrizDistancias[i, j], type: GRB.BINARY, name: $"X_{i}");
                 }
             }
+
+            for (int i = 0; i < _numeroPontos; i++)
+            {
+                U[i] = Modelo.AddVar(lb: 0, ub: 10000000, obj: 0, type: GRB.CONTINUOUS, name: $"u_{i}");
+            }
+
             // de cada ponto sai para exatamento um ponto
             GRBLinExpr expr = new();
             for (int i = 0; i < _numeroPontos;   i++)
@@ -43,26 +53,49 @@ namespace CaixeiroViajante
                 {
                     if (i != j)
                     {
-                        expr.AddTerm(1, X[i, j]);
+                        expr.AddTerm(coeff: 1, var: X[i, j]);
                     }
                 }
-                Modelo.AddConstr(expr == 1, "R2_" + i.ToString());
+                // restrição 2
+                Modelo.AddConstr(constr: expr == 1, name: $"R2_{i}");
             }
 
             // para cada ponto a chegada só ocorre por apenas um ponto
             for (int j = 0; j < _numeroPontos; j++)
             {
+                expr.Clear();
                 for (int i = 0; i < _numeroPontos; i++)
                 {
                     if (i != j)
                     {
-                        expr.AddTerm(1, X[i, j]);
+                        expr.AddTerm(coeff: 1, var: X[i, j]);
                     }
                 }
-                Modelo.AddConstr(expr == 1, "R3_" + j.ToString());
+                // restrição 3
+                Modelo.AddConstr(constr: expr == 1, name: $"R3_{j}");
             }
+
+            // Restrição MTZ
+            Modelo.AddConstr(constr: U[0] == 0, name: "Ryyyyy");
+            for (int i = 1; i < _numeroPontos; i++)
+            {
+                for (int j = 1; j < _numeroPontos; j++)
+                {
+                    if(i!=j)
+                    Modelo.AddConstr(U[i] - U[j] + (_numeroPontos - 1) * X[i, j] <= _numeroPontos - 1 - 1, name: $"RMTZ_{i}_{j}");
+                }
+            }
+
             //escrever modelo
-            Modelo.Write(@"C:\gurobi\00tsp.lp");
+            Modelo.Write(filename: @"C:\gurobi\00tsp.lp");
+            Stopwatch cronometro = new();
+            cronometro.Start();
+            Modelo.Optimize();
+
+            cronometro.Stop();
+            MessageBox.Show(cronometro.ElapsedMilliseconds.ToString());
+            Modelo.Write(filename: @"C:\gurobi\00tsp.sol");
+
         }
 
         public   void GerarPontosAleatorios()
@@ -90,7 +123,6 @@ namespace CaixeiroViajante
                     MatrizDistancias[i, j] = CalcularDistanciaEuclidiana2Pontos(x1, y1, x2, y2);
                  }
             }
-            Console.WriteLine(MatrizDistancias);
         }
 
         public static double CalcularDistanciaEuclidiana2Pontos(double x1, double y1, double x2, double y2)
@@ -101,9 +133,6 @@ namespace CaixeiroViajante
             double deltaY = y2 - y1;
             return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
         }
-
-
-
 
     }
 }
