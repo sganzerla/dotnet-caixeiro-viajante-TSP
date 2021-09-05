@@ -34,7 +34,7 @@
 ## Restrições de Miller-Tucker-Zemlin(MTZ)
 
 Removendo sub-rotas
-![image](resources)
+![image](./resources/mtz.png)
 
 ## Referência
 
