@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CaixeiroViajante",
+    "\\CaixeiroViajante\\CaixeiroViajante"
   ],
-  "SelectedNode": "\\C:\\Users\\aliss\\Source\\Repos\\dotnet-caixeiro-viajante-TSP",
+  "SelectedNode": "\\CaixeiroViajante\\CaixeiroViajante\\ProblemaTSP.cs",
   "PreviewInSolutionExplorer": false
 }

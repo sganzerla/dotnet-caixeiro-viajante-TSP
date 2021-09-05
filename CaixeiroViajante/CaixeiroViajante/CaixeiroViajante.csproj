@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OPTANO.Modeling.Gurobi" Version="9.1.2.26" />
+  </ItemGroup>
+
 </Project>

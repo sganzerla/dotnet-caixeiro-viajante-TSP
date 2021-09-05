@@ -15,6 +15,7 @@ namespace CaixeiroViajante
             ProblemaTSP MeuProblema = new(numeroPontos:8);
             MeuProblema.GerarPontosAleatorios();
             MeuProblema.CalcularMatrizDistancias();
+            MeuProblema.CriarResolverModelo();
         }
     }
 }

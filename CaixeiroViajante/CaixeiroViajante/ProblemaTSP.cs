@@ -1,4 +1,5 @@
 ﻿using System;
+using Gurobi;
 
 namespace CaixeiroViajante
 {
@@ -7,7 +8,8 @@ namespace CaixeiroViajante
         private int _numeroPontos;
         public double[,] Coordenadas;
         public double[,] MatrizDistancias;
-
+        public GRBEnv Ambiente;
+        public GRBModel Modelo;
 
 
         public ProblemaTSP(int numeroPontos)
@@ -15,6 +17,53 @@ namespace CaixeiroViajante
             _numeroPontos = numeroPontos;
         }
 
+
+        public void CriarResolverModelo()
+        {
+            Ambiente = new GRBEnv();
+            Modelo = new GRBModel(Ambiente)
+            {
+                ModelSense = GRB.MINIMIZE
+            };
+            GRBVar[,] X = new GRBVar[_numeroPontos, _numeroPontos];
+            // criação das variáveis de decisão da função objetivo
+            for(int i = 0; i < _numeroPontos; i++)
+            {
+                for(int j=0; j < _numeroPontos; j++)
+                {
+                    X[i, j] = Modelo.AddVar(0, 1, MatrizDistancias[i, j], GRB.BINARY, "X_" + i.ToString() + "_");
+                }
+            }
+            // de cada ponto sai para exatamento um ponto
+            GRBLinExpr expr = new();
+            for (int i = 0; i < _numeroPontos;   i++)
+            {
+                expr.Clear();
+                for (int j = 0; j < _numeroPontos; j++)
+                {
+                    if (i != j)
+                    {
+                        expr.AddTerm(1, X[i, j]);
+                    }
+                }
+                Modelo.AddConstr(expr == 1, "R2_" + i.ToString());
+            }
+
+            // para cada ponto a chegada só ocorre por apenas um ponto
+            for (int j = 0; j < _numeroPontos; j++)
+            {
+                for (int i = 0; i < _numeroPontos; i++)
+                {
+                    if (i != j)
+                    {
+                        expr.AddTerm(1, X[i, j]);
+                    }
+                }
+                Modelo.AddConstr(expr == 1, "R3_" + j.ToString());
+            }
+            //escrever modelo
+            Modelo.Write(@"C:\gurobi\00tsp.lp");
+        }
 
         public   void GerarPontosAleatorios()
         {
