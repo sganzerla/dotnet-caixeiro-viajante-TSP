@@ -33,13 +33,13 @@
 
 ## Limitações
 
-- Na resolução do problema obtem-se muitas subrotas que entram em conflito com as restrições do domínio, como a não repetição de pontos e que todos eles sejam visitados, então adiciona-se restrições dessas sub-rotas ao modelo manualmente.
+- Na resolução do problema obtem-se muitas subrotas que entram em conflito com as restrições do domínio, como a não repetição de pontos e que todos eles sejam visitados, então cria-se restrições para evitar essas sub-rotas no modelo manualmente.
 - Como limitante há um crescimento exponencial no número de restrições conforme aumenta-se o número de pontos e por consequência o consumo de recurso computacional.
-- O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e ainda reduz consideravelmente o custo computacional para as equações, sem ele uma rota de 20 pontos teria 1.048.554 combinações de restrições e com ele 342 restrições, consumo de 0,032% do método tradicional.
+- O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e reduzindo consideravelmente o custo computacional para as equações, sem ele uma rota de 20 pontos teria 1.048.554 combinações de restrições e com ele apenas 342 restrições, consumo de 0,032% em comparação ao método tradicional.
   
 ## Restrições de Miller-Tucker-Zemlin(MTZ)
 
-- O algoritmo `MTZ` mesmo removendo sub-rotas esta solução ainda continuará sujeita ao limite de recurso computacional do hospedeiro.
+- Mesmo o algoritmo `MTZ` removendo subrotas com um número de restrições excepcionalmente menor que o método convencional a solução ainda continuará sujeita ao limite de recurso computacional do hospedeiro.
 
 ![image](resources/mtz.png)
 
