@@ -38,10 +38,10 @@
 - O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e ainda reduz consideravelmente o custo computacional para as equações, sem ele uma rota de 20 pontos teria 1.048.554 combinações de restrições e com ele 342 restrições, consumo de 0,032% do método tradicional.
   
 ## Restrições de Miller-Tucker-Zemlin(MTZ)
- 
+
 - O algoritmo `MTZ` mesmo removendo sub-rotas esta solução ainda continuará sujeita ao limite de recurso computacional do hospedeiro.
 
-![image](./resources/mtz.png)
+![image](resources/mtz.png)
 
 ## Próximos passos
 
