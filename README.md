@@ -29,13 +29,21 @@ Implementação para resolver o problema do caixeiro viajante para N pontos util
 
 - Na resolução do problema obtem-se muitas subrotas que entram em conflito com as restrições do domínio, como a não repetição de pontos e que todos eles sejam visitados, então adiciona-se restrições dessas sub-rotas ao modelo manualmente.
 - Como limitante há um crescimento exponencial no número de restrições conforme aumenta-se o número de pontos e por consequência o consumo de recurso computacional.
-- O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e ainda reduz consideravelmente o custo computacional para as equações.
-
+- O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e ainda reduz consideravelmente o custo computacional para as equações, sem ele uma rota de 20 pontos teria 1.048.554 combinações de restrições e com ele 342 restrições, consumo de 0,032% do método tradicional.
+  
 ## Restrições de Miller-Tucker-Zemlin(MTZ)
 
 - O algorRemovendo sub-rotas com esta solução ainda que seja muito vantajoso em relação a não usá-la continuará sujeita ao limite computacional do hospedeiro.
   
 ![image](resources)
+
+## Próximos passos
+
+- Implementar outra estratégia como solução para o TSP sem `MTZ`, que em tempo de execução identifica existência de subrotas e adiciona-as dinâmicamente como restrição do modelo antes de gerar a solução.
+- Verificar exemplos de implementação no site do `Gurobi`
+
+  model.SetCallback(new tsp_cs(vars));
+  model.Optimize();
 
 ## Referência
 

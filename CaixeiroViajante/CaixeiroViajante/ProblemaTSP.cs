@@ -7,7 +7,7 @@ namespace CaixeiroViajante
 {
     class ProblemaTSP
     {
-        private int _numeroPontos;
+        private readonly int _numeroPontos;
         public double[,] Coordenadas;
         public double[,] MatrizDistancias;
         public GRBEnv Ambiente;
@@ -39,9 +39,11 @@ namespace CaixeiroViajante
                 }
             }
 
-            for (int i = 0; i < _numeroPontos; i++)
+            U[0] = Modelo.AddVar(lb: 0, ub: 10000000, obj: 0, type: GRB.CONTINUOUS, name: $"u_{0}");
+
+            for (int i = 1; i < _numeroPontos; i++)
             {
-                U[i] = Modelo.AddVar(lb: 0, ub: 10000000, obj: 0, type: GRB.CONTINUOUS, name: $"u_{i}");
+                U[i] = Modelo.AddVar(lb: 1, ub: 10000000, obj: 0, type: GRB.CONTINUOUS, name: $"u_{i}");
             }
 
             // de cada ponto sai para exatamento um ponto
