@@ -1,11 +1,17 @@
 # dotnet-caixeiro-viajante-TSP
 
-Implementação para resolver o problema do caixeiro viajante para N pontos utilizando-se a biblioteca `Gurobi` para realizar a otimização do problema com regras de restrição baseadas no algoritmo de `Miller-Tucker-Zemlin (MTZ)`.
+- Implementação para resolver o problema do caixeiro viajante para N pontos utilizando-se a biblioteca `Gurobi`.
+- Para realizar a otimização do problema utiliza-se as regras de restrição baseadas no algoritmo de `Miller-Tucker-Zemlin (MTZ)`.
 
 ## Domínio
 
-- Um percurso com vários pontos que devem ser visitados uma única vez pelo viajante
-- O deslocamento até um ponto deve ter um único ponto de origem
+- Um percurso com vários pontos que devem ser visitados pelo viajante
+- Cada ponto de destino deve ser visitado uma única vez pelo viajante
+- Cada ponto deve ter um único ponto de origem
+
+## Objetivo
+
+- Escolher a melhor rota de modo a otimizar os custos diminuindo a distância total percorrida
 
 ## Dependências
 
@@ -32,10 +38,10 @@ Implementação para resolver o problema do caixeiro viajante para N pontos util
 - O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e ainda reduz consideravelmente o custo computacional para as equações, sem ele uma rota de 20 pontos teria 1.048.554 combinações de restrições e com ele 342 restrições, consumo de 0,032% do método tradicional.
   
 ## Restrições de Miller-Tucker-Zemlin(MTZ)
+ 
+- O algoritmo `MTZ` mesmo removendo sub-rotas esta solução ainda continuará sujeita ao limite de recurso computacional do hospedeiro.
 
-- O algorRemovendo sub-rotas com esta solução ainda que seja muito vantajoso em relação a não usá-la continuará sujeita ao limite computacional do hospedeiro.
-  
-![image](resources)
+![image](./resources/mtz.png)
 
 ## Próximos passos
 
@@ -49,8 +55,9 @@ Implementação para resolver o problema do caixeiro viajante para N pontos util
 
 Material obtido do Pr. Dr. Gustavo Valentim Loch da UFPR.
 
-[Youtube Pesquisa Operacional](https://youtu.be/7MDnRH97--o) Parte 1 - 00:25:04 hrs duração (Acessado em Set 2021)
-[Youtube Pesquisa Operacional](https://youtu.be/VK1XOad0aa8) Parte 2 - 00:31:20 hrs duração (Acessado em Set 2021)
-[Youtube Pesquisa Operacional](https://youtu.be/ExGhV4ruxoE) Parte 3 - 00:27:26 hrs duração (Acessado em Set 2021)
-[Youtube Pesquisa Operacional](https://youtu.be/wqPti8ptR3I) Parte 4 - 01:13:00 hrs duração (Acessado em Set 2021)
-[Youtube Pesquisa Operacional](https://youtu.be/mQ5TFXXrMtc) Restrições de Miller-Tucker-Zemlin (MTZ) - 01:27:58 hrs duração (Acessado em Set 2021)
+- [Youtube Pesquisa Operacional](https://youtu.be/7MDnRH97--o) Parte 1 - 00:25:04 hrs duração (Acessado em Set 2021)
+- [Youtube Pesquisa Operacional](https://youtu.be/VK1XOad0aa8) Parte 2 - 00:31:20 hrs duração (Acessado em Set 2021)
+- [Youtube Pesquisa Operacional](https://youtu.be/ExGhV4ruxoE) Parte 3 - 00:27:26 hrs duração (Acessado em Set 2021)
+- [Youtube Pesquisa Operacional](https://youtu.be/wqPti8ptR3I) Parte 4 - 01:13:00 hrs duração (Acessado em Set 2021)
+- [Youtube Pesquisa Operacional](https://youtu.be/mQ5TFXXrMtc) Restrições de Miller-Tucker-Zemlin (MTZ) - 01:27:58 hrs duração (Acessado em Set 2021)
+
