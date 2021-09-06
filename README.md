@@ -3,8 +3,7 @@
 - Implementação para resolver o problema do caixeiro viajante para N pontos utilizando-se a biblioteca `Gurobi`.
 - Para realizar a otimização do problema utiliza-se as regras de restrição baseadas no algoritmo de `Miller-Tucker-Zemlin (MTZ)`.
 
-![image](resorces/cv.jpg)
-
+![image](resources/cv.jpg) 
 
 ## Domínio
 
