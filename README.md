@@ -25,12 +25,21 @@ Implementação para resolver o problema do caixeiro viajante para N pontos util
 - Criar projeto dotnet e adicionar o pacote via [Nuget](https://www.nuget.org/packages/OPTANO.Modeling.Gurobi/)
     `dotnet add package OPTANO.Modeling.Gurobi --version 9.1.2.26`
 
+## Limitações
+
+- Na resolução do problema obtem-se muitas subrotas que entram em conflito com as restrições do domínio, como a não repetição de pontos e que todos eles sejam visitados, então adiciona-se restrições dessas sub-rotas ao modelo manualmente.
+- Como limitante há um crescimento exponencial no número de restrições conforme aumenta-se o número de pontos e por consequência o consumo de recurso computacional.
+- O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e ainda reduz consideravelmente o custo computacional para as equações.
+
 ## Restrições de Miller-Tucker-Zemlin(MTZ)
 
-Removendo sub-rotas
+- O algorRemovendo sub-rotas com esta solução ainda que seja muito vantajoso em relação a não usá-la continuará sujeita ao limite computacional do hospedeiro.
+  
 ![image](resources)
 
 ## Referência
+
+Material obtido do Pr. Dr. Gustavo Valentim Loch da UFPR.
 
 [Youtube Pesquisa Operacional](https://youtu.be/7MDnRH97--o) Parte 1 - 00:25:04 hrs duração (Acessado em Set 2021)
 [Youtube Pesquisa Operacional](https://youtu.be/VK1XOad0aa8) Parte 2 - 00:31:20 hrs duração (Acessado em Set 2021)
