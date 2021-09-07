@@ -2,7 +2,7 @@
 
 TSP Tradicional  |  TSP 
 :---------: | :------:  
-![image](resources/cv.jpg)  | ![image](resources/cv.jpg)  
+![image](resources/cv.jpg)  | ![image](resources/pontos.png)  
 
 - Implementação para resolver o problema do caixeiro viajante para N pontos utilizando a biblioteca `Gurobi` para realizar a otimização.
 - A estratégia adotada para a otimização utiliza as regras de restrição baseadas no algoritmo de `Miller-Tucker-Zemlin (MTZ)`.
