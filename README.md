@@ -41,7 +41,7 @@ docker pull gurobi/optimizer
 - Criar projeto dotnet e adicionar o pacote via [Nuget](https://www.nuget.org/packages/OPTANO.Modeling.Gurobi/)
 
 ~~~Shell
-    dotnet add package OPTANO.Modeling.Gurobi --version 9.1.2.26`
+dotnet add package OPTANO.Modeling.Gurobi --version 9.1.2.26`
 ~~~
 
 ## Limitações
