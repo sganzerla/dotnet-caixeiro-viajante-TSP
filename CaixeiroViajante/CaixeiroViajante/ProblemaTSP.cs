@@ -8,15 +8,17 @@ namespace CaixeiroViajante
     class ProblemaTSP
     {
         private readonly int _numeroPontos;
+        private readonly string _pathRelatorio;
         public double[,] Coordenadas;
         public double[,] MatrizDistancias;
         public GRBEnv Ambiente;
         public GRBModel Modelo;
 
 
-        public ProblemaTSP(int numeroPontos)
+        public ProblemaTSP(int numeroPontos, string pathRelatorio)
         {
             _numeroPontos = numeroPontos;
+            _pathRelatorio = pathRelatorio;
         }
 
 
@@ -89,14 +91,14 @@ namespace CaixeiroViajante
             }
 
             //escrever modelo
-            Modelo.Write(filename: @"C:\gurobi\00tsp.lp");
+            Modelo.Write(filename: @$"{_pathRelatorio}\00tsp.lp");
             Stopwatch cronometro = new();
             cronometro.Start();
             Modelo.Optimize();
 
             cronometro.Stop();
             MessageBox.Show(cronometro.ElapsedMilliseconds.ToString());
-            Modelo.Write(filename: @"C:\gurobi\00tsp.sol");
+            Modelo.Write(filename: @$"{_pathRelatorio}\00tsp.sol");
 
         }
 
