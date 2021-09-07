@@ -17,5 +17,13 @@ namespace CaixeiroViajante
             MeuProblema.CalcularMatrizDistancias();
             MeuProblema.CriarResolverModelo();
         }
+
+        private void ButtonChangedPath_Click(object sender, EventArgs e)
+        {
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBoxPathReport.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
     }
 }

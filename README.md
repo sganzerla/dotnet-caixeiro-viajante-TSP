@@ -1,6 +1,6 @@
 # dotnet-caixeiro-viajante-TSP
 
-TSP Tradicional  |  TSP 
+TSP Tradicional  |  TSP
 :---------: | :------:  
 ![image](resources/cv.jpg)  | ![image](resources/pontos.png)  
 
@@ -28,9 +28,11 @@ TSP Tradicional  |  TSP
 - Realizar o download e instalação do programa [Gurobi Optimizer](https://www.gurobi.com/downloads/gurobi-software/)
 - Solicitar uma [licença acadêmica](https://www.gurobi.com/downloads/end-user-license-agreement-academic/) (necessário uma conta de email universitária)
 - Com a licença criada em [Guropi](https://www.gurobi.com/downloads/licenses/) ir em detalhes, pegar o id da chave e executar o comando no terminal (com a sua respectiva chave)
+
 ~~~Shell
 grbgetkey xx-xx-xx-xx-xx
 ~~~
+
 - Executar o programa `Gurobi Token Server`
 - Baixar e rodar imagem [Docker](https://hub.docker.com/r/gurobi/optimizer) do Guropi
 
@@ -77,4 +79,3 @@ Material obtido do Pr. Dr. Gustavo Valentim Loch da UFPR.
 - [Youtube Pesquisa Operacional](https://youtu.be/ExGhV4ruxoE) Parte 3 - 00:27:26 hrs duração (Acessado em Set 2021)
 - [Youtube Pesquisa Operacional](https://youtu.be/wqPti8ptR3I) Parte 4 - 01:13:00 hrs duração (Acessado em Set 2021)
 - [Youtube Pesquisa Operacional](https://youtu.be/mQ5TFXXrMtc) Restrições de Miller-Tucker-Zemlin (MTZ) - 01:27:58 hrs duração (Acessado em Set 2021)
-
