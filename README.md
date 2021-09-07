@@ -1,9 +1,11 @@
 # dotnet-caixeiro-viajante-TSP
 
-- Implementação para resolver o problema do caixeiro viajante para N pontos utilizando-se a biblioteca `Gurobi`.
-- Para realizar a otimização do problema utiliza-se as regras de restrição baseadas no algoritmo de `Miller-Tucker-Zemlin (MTZ)`.
+TSP Tradicional  |  TSP 
+:---------: | :------:  
+![image](resources/cv.jpg)  | ![image](resources/cv.jpg)  
 
-![image](resources/cv.jpg) 
+- Implementação para resolver o problema do caixeiro viajante para N pontos utilizando a biblioteca `Gurobi` para realizar a otimização.
+- A estratégia adotada para a otimização utiliza as regras de restrição baseadas no algoritmo de `Miller-Tucker-Zemlin (MTZ)`.
 
 ## Domínio
 
@@ -15,14 +17,14 @@
 
 - Escolher a melhor rota de modo a otimizar os custos diminuindo a distância total percorrida
 
-## Dependências
+## Tecnologias
 
 - [Guropi Optimization](https://www.gurobi.com/)
 - [.Net](https://dotnet.microsoft.com/download)
 
 ## Licença Guropi
 
-- Para utilizar a dll, é necessário realizar cadastro no site [Guropi](https://www.gurobi.com/account/)
+- Para utilizar a biblioteca é necessário realizar cadastro no site [Guropi](https://www.gurobi.com/account/)
 - Realizar o download e instalação do programa [Gurobi Optimizer](https://www.gurobi.com/downloads/gurobi-software/)
 - Solicitar uma [licença acadêmica](https://www.gurobi.com/downloads/end-user-license-agreement-academic/) (necessário uma conta de email universitária)
 - Com a licença criada em [Guropi](https://www.gurobi.com/downloads/licenses/) ir em detalhes, pegar o id da chave e executar o comando no terminal (com a sua respectiva chave)
@@ -35,23 +37,27 @@
 
 ## Limitações
 
-- Na resolução do problema obtem-se muitas subrotas que entram em conflito com as restrições do domínio, como a não repetição de pontos e que todos eles sejam visitados, então cria-se restrições para evitar essas sub-rotas no modelo manualmente.
-- Como limitante há um crescimento exponencial no número de restrições conforme aumenta-se o número de pontos e por consequência o consumo de recurso computacional.
-- O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas e reduzindo consideravelmente o custo computacional para as equações, sem ele uma rota de 20 pontos teria 1.048.554 combinações de restrições e com ele apenas 342 restrições, consumo de 0,032% em comparação ao método tradicional.
-  
+- Na resolução do problema obtem-se muitas subrotas que entram em conflito com as restrições do domínio (não repetição de pontos e que todos eles sejam visitados), então cria-se restrições manualmente para evitar essas subrotas no modelo.
+- Como limitante há um crescimento exponencial no número de restrições conforme aumenta-se o número de pontos
+- A consequência desse fenônemo é o consumo de recurso computacional
+- O algoritmo `MTZ` dispensa a adição manual das restrições de subrotas reduzindo consideravelmente o custo computacional
+
 ## Restrições de Miller-Tucker-Zemlin(MTZ)
 
-- Mesmo o algoritmo `MTZ` removendo subrotas com um número de restrições excepcionalmente menor que o método convencional a solução ainda continuará sujeita ao limite de recurso computacional do hospedeiro.
-
 ![image](resources/mtz.png)
+
+- Como comparação uma rota com 20 pontos teria 1.048.554 combinações de restrições no modelo e com esse algoritmo apenas 342 restrições, percentual de 0,032% em comparação ao método tradicional.
+- Mesmo o algoritmo `MTZ` removendo subrotas com um número de restrições excepcionalmente menor que o método convencional a solução ainda continuará sujeita ao limite de recurso computacional do hospedeiro.
 
 ## Próximos passos
 
 - Implementar outra estratégia como solução para o TSP sem `MTZ`, que em tempo de execução identifica existência de subrotas e adiciona-as dinâmicamente como restrição do modelo antes de gerar a solução.
 - Verificar exemplos de implementação no site do `Gurobi`
 
+~~~C#
   model.SetCallback(new tsp_cs(vars));
   model.Optimize();
+~~~
 
 ## Referência
 
