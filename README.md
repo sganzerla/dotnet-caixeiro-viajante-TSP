@@ -1,6 +1,8 @@
 # dotnet-caixeiro-viajante-TSP
 
-TSP Tradicional  |  TSP
+![image](resources/main.png)
+
+Caixeiro Viajante Tradicional |  Algoritmo p/ Caixeiro Viajante
 :---------: | :------:  
 ![image](resources/cv.jpg)  | ![image](resources/pontos.png)  
 
