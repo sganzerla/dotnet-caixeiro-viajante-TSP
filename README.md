@@ -1,5 +1,7 @@
 # dotnet-caixeiro-viajante-TSP
 
+Download version [1.0.0](https://github.com/sganzerla/dotnet-caixeiro-viajante-TSP/releases/download/v1.0.0/CaixeiroViajanteInstall.exe)
+
 ![image](resources/main.png)
 
 Caixeiro Viajante Tradicional |  Algoritmo p/ Caixeiro Viajante
