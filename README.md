@@ -23,22 +23,22 @@ Caixeiro Viajante Tradicional |  Algoritmo p/ Caixeiro Viajante
 
 ## Tecnologias
 
-- [Guropi Optimization](https://www.gurobi.com/)
+- [Gurobi Optimization](https://www.gurobi.com/)
 - [.Net](https://dotnet.microsoft.com/download)
 
-## Licença Guropi
+## Licença Gurobi
 
-- Para utilizar a biblioteca é necessário realizar cadastro no site [Guropi](https://www.gurobi.com/account/)
+- Para utilizar a biblioteca é necessário realizar cadastro no site [Gurobi](https://www.gurobi.com/account/)
 - Realizar o download e instalação do programa [Gurobi Optimizer](https://www.gurobi.com/downloads/gurobi-software/)
 - Solicitar uma [licença acadêmica](https://www.gurobi.com/downloads/end-user-license-agreement-academic/) (necessário uma conta de email universitária)
-- Com a licença criada em [Guropi](https://www.gurobi.com/downloads/licenses/) ir em detalhes, pegar o id da chave e executar o comando no terminal (com a sua respectiva chave)
+- Com a licença criada em [Gurobi](https://www.gurobi.com/downloads/licenses/) ir em detalhes, pegar o id da chave e executar o comando no terminal (com a sua respectiva chave)
 
 ~~~Shell
 grbgetkey xx-xx-xx-xx-xx
 ~~~
 
 - Executar o programa `Gurobi Token Server`
-- Baixar e rodar imagem [Docker](https://hub.docker.com/r/gurobi/optimizer) do Guropi
+- Baixar e rodar imagem [Docker](https://hub.docker.com/r/gurobi/optimizer) do Gurobi
 
 ~~~Shell
 docker pull gurobi/optimizer
