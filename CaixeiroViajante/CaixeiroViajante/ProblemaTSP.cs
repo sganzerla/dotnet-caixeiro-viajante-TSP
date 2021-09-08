@@ -22,7 +22,7 @@ namespace CaixeiroViajante
         }
 
 
-        public void CriarResolverModelo()
+        public bool CriarResolverModelo()
         {
             Ambiente = new GRBEnv();
             Modelo = new GRBModel(Ambiente)
@@ -32,12 +32,12 @@ namespace CaixeiroViajante
             GRBVar[,] X = new GRBVar[_numeroPontos, _numeroPontos];
             GRBVar[] U = new GRBVar[_numeroPontos];
             // criação das variáveis de decisão da função objetivo
-            for(int i = 0; i < _numeroPontos; i++)
+            for (int i = 0; i < _numeroPontos; i++)
             {
-                for(int j=0; j < _numeroPontos; j++)
+                for (int j = 0; j < _numeroPontos; j++)
                 {
                     // função objetivo
-                    X[i, j] = Modelo.AddVar(lb: 0, ub: 1, obj: MatrizDistancias[i, j], type: GRB.BINARY, name: $"X_{i}");
+                    X[i, j] = Modelo.AddVar(lb: 0, ub: 1, obj: MatrizDistancias[i, j], type: GRB.BINARY, name: $"x_{i}");
                 }
             }
 
@@ -48,9 +48,9 @@ namespace CaixeiroViajante
                 U[i] = Modelo.AddVar(lb: 1, ub: 10000000, obj: 0, type: GRB.CONTINUOUS, name: $"u_{i}");
             }
 
-            // de cada ponto sai para exatamento um ponto
+            // de cada ponto sai para exatamente um ponto
             GRBLinExpr expr = new();
-            for (int i = 0; i < _numeroPontos;   i++)
+            for (int i = 0; i < _numeroPontos; i++)
             {
                 expr.Clear();
                 for (int j = 0; j < _numeroPontos; j++)
@@ -85,8 +85,8 @@ namespace CaixeiroViajante
             {
                 for (int j = 1; j < _numeroPontos; j++)
                 {
-                    if(i!=j)
-                    Modelo.AddConstr(U[i] - U[j] + (_numeroPontos - 1) * X[i, j] <= _numeroPontos - 1 - 1, name: $"RMTZ_{i}_{j}");
+                    if (i != j)
+                        Modelo.AddConstr(U[i] - U[j] + (_numeroPontos - 1) * X[i, j] <= _numeroPontos - 1 - 1, name: $"RMTZ_{i}_{j}");
                 }
             }
 
@@ -100,32 +100,34 @@ namespace CaixeiroViajante
             MessageBox.Show(cronometro.ElapsedMilliseconds.ToString());
             Modelo.Write(filename: @$"{_pathRelatorio}\00tsp.sol");
 
+            return true;
+
         }
 
-        public   void GerarPontosAleatorios()
+        public void GerarPontosAleatorios()
         {
             Coordenadas = new double[_numeroPontos, 2];
             Random aleatorio = new(1);
-            for (int i =0; i< _numeroPontos; i++)
+            for (int i = 0; i < _numeroPontos; i++)
             {
-                Coordenadas[i, 0] = 10 + aleatorio.NextDouble()*490;
-                Coordenadas[i, 1] = 10 + aleatorio.NextDouble()*490;
+                Coordenadas[i, 0] = 10 + aleatorio.NextDouble() * 490;
+                Coordenadas[i, 1] = 10 + aleatorio.NextDouble() * 490;
             }
         }
 
-        public   void CalcularMatrizDistancias()
+        public void CalcularMatrizDistancias()
         {
             MatrizDistancias = new double[_numeroPontos, _numeroPontos];
-            for(int i=0; i< _numeroPontos; i++)
+            for (int i = 0; i < _numeroPontos; i++)
             {
-                for (int j=0; j < _numeroPontos; j++)
+                for (int j = 0; j < _numeroPontos; j++)
                 {
                     double x1 = Coordenadas[i, 0];
                     double y1 = Coordenadas[i, 1];
                     double x2 = Coordenadas[j, 0];
                     double y2 = Coordenadas[j, 1];
                     MatrizDistancias[i, j] = CalcularDistanciaEuclidiana2Pontos(x1, y1, x2, y2);
-                 }
+                }
             }
         }
 
