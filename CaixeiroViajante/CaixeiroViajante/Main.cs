@@ -8,6 +8,7 @@ namespace CaixeiroViajante
         public Main()
         {
             InitializeComponent();
+            labelVersion.Text = Application.ProductVersion;
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -29,5 +30,7 @@ namespace CaixeiroViajante
                 textBoxPathReport.Text = folderBrowserDialog1.SelectedPath;
             }
         }
+
+     
     }
 }
