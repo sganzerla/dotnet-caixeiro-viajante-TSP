@@ -13,9 +13,13 @@ Caixeiro Viajante Tradicional |  Algoritmo p/ Caixeiro Viajante
 
 ## Domínio
 
-- Um percurso com vários pontos que devem ser visitados pelo viajante
+![image](resources/domain.png)
+
+- A função objetivo é a somatória de todas as arestas, para isso tem-se três restrições:
+
 - Cada ponto de destino deve ser visitado uma única vez pelo viajante
-- Cada ponto deve ter um único ponto de origem
+- Cada ponto de origem deve ter um único ponto chegada
+- Todos os pontos devem ser visitados sem utilizar subrotas
 
 ## Objetivo
 
